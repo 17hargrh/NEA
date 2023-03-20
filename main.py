@@ -16,23 +16,32 @@ def passcheck(passwd):
         elif not i.isalnum():
             has_special = True
         elif i.isspace():
-            has_space = False 
+            has_space = False
+
+    return all([has_capital, has_num, has_special, has_lower, has_space])
 
 def main():
-    passwd = input("Please enter password: ")
-        
-    while not passcheck(passwd):
-        passwd = input("Password does not meet requrements!\nPlease enter again: ")
     
-    while len(passwd) < 8:
-        passwd = input("Password is too short!\nPlease Re-enter password: ")
-        break
-
     
-        
-    passwd2 = input("Please re-enter password: ")
+    valid = False
+    while not valid:
 
-    while passwd != passwd2:
-        passwd2 = input("Passwords do not match\nPlease Re-enter: ")
+        passwd = input("Please enter password: ")
+
+        if not passcheck(passwd):
+
+            print("Password does not meet requrements!\nPlease enter again: ")
+
+        elif len(passwd) < 8:
+            print("your password is too short")
+                  
+        else:
+            passwd2 = input("Please re-enter password: ")
+            if passwd == passwd2:
+
+                valid = True
+
+            else:
+                print ('passwords do not match please enter again')
 
 main()
